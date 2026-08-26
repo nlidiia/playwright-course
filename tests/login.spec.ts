@@ -3,8 +3,8 @@ import { test, expect } from '@playwright/test';
 test('Verify login with valid credentials', async ({ page }) => {
   await page.goto('/auth/login');
 
-  await page.locator('#email').fill('test@qa.qa');
-  await page.locator('#password').fill('strong@Test02');
+  await page.locator('#email').fill('customer@practicesoftwaretesting.com');
+  await page.locator('#password').fill('welcome01');
 
   await page.getByRole('button', { name: 'Login' }).click();
 
@@ -14,7 +14,7 @@ test('Verify login with valid credentials', async ({ page }) => {
     page.getByRole('heading', { name: 'My account' })
   ).toBeVisible();
 
-  const userName = page.locator('[data-test="nav-menu"]');
+  const userName = page.getByTestId('nav-menu');
 
   await expect(userName).toHaveText('Jane Doe');
 });
