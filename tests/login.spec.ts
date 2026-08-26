@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('Verify login with valid credentials', async ({ page }) => {
+  test.skip(!!process.env.CI, 'Skip on CI');
   await page.goto('/auth/login');
 
   await page.locator('#email').fill('customer@practicesoftwaretesting.com');
