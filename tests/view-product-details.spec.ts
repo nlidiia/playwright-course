@@ -15,9 +15,9 @@ test('Verify user can view product details', async ({ page }) => {
     const homePage = new HomePage(page);
 
     await accountPage.clickHomeBtn();
-    await homePage.clickCombinationPliers();
+    await homePage.selectProductByName('Combination Pliers');
     await expect(page).toHaveURL(/\/product\//);
-    await expect(homePage.productName).toHaveText('Combination Pliers');
+    await expect(homePage.product).toHaveText('Combination Pliers');
     await expect(homePage.productPrice).toHaveText('14.15');
     await expect(homePage.addToCartBtn).toBeVisible();
     await expect(homePage.addToFavoriteBtn).toBeVisible();

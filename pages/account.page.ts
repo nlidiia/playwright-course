@@ -12,5 +12,4 @@ export class AccountPage {
     async clickHomeBtn(): Promise<void>{
         await this.homeBtn.click();
     }
-
 }
