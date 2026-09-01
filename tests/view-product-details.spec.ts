@@ -3,6 +3,8 @@ import { LoginPage } from '../pages/login.page';
 import { AccountPage } from "../pages/account.page"
 import { HomePage } from '../pages/home.page';
 
+test.skip(!!process.env.CI, 'Login is blocked in GitHub CI');
+
 test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
     await page.goto('/auth/login');
