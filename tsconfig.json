@@ -1,11 +1,32 @@
 {
   "compilerOptions": {
+    /* Language and Environment */
     "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+
+    /* Modules */
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+
+    /* Node.js types */
     "types": ["node"],
+
+    /* Type Checking */
     "strict": true,
-    "noEmit": true
+    "forceConsistentCasingInFileNames": true,
+
+    /* Do not generate JavaScript files */
+    "noEmit": true,
+
+    /* Completeness */
+    "skipLibCheck": true
   },
-  "include": ["tests/**/*.ts", "playwright.config.ts"]
+
+  "include": [
+    "tests/**/*.ts",
+    "pages/**/*.ts",
+    "playwright.config.ts"
+  ]
 }

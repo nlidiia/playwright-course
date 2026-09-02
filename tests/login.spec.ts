@@ -1,14 +1,13 @@
 import { test, expect } from '@playwright/test';
+import { LoginPage } from '../pages/login.page';
 
 test('Verify login with valid credentials', async ({ page }) => {
+  const loginPage = new LoginPage(page);
+    // eslint-disable-next-line playwright/no-skipped-test
   test.skip(!!process.env.CI, 'Skip on CI');
   await page.goto('/auth/login');
-
-  await page.locator('#email').fill('customer@practicesoftwaretesting.com');
-  await page.locator('#password').fill('welcome01');
-
-  await page.getByRole('button', { name: 'Login' }).click();
-
+  await loginPage.performLogin('customer@practicesoftwaretesting.com', 'welcome01');
+  
   await expect(page).toHaveURL('/account');
 
   await expect(
