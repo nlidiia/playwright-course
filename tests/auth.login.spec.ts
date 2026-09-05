@@ -9,8 +9,8 @@ setup('Login and save authentication state', async ({ page }) => {
   await page.goto('/auth/login');
 
   await loginPage.performLogin(
-    'customer@practicesoftwaretesting.com',
-    'welcome01',
+    'customer3@practicesoftwaretesting.com',
+    'pass123',
   );
 
   await expect(page).toHaveURL('/account');
@@ -19,7 +19,7 @@ setup('Login and save authentication state', async ({ page }) => {
     page.getByRole('heading', { name: 'My account' }),
   ).toBeVisible();
 
-  await expect(page.getByTestId('nav-menu')).toHaveText('Jane Doe');
+  await expect(page.getByTestId('nav-menu')).toHaveText('Bob Smith');
 
   await page.context().storageState({
     path: authFile,

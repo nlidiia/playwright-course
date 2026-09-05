@@ -9,8 +9,8 @@ test('Login and save authentication state', async ({ page }) => {
   await page.goto('/auth/login');
 
   await loginPage.performLogin(
-    'customer@practicesoftwaretesting.com',
-    'welcome01',
+    'customer3@practicesoftwaretesting.com',
+    'pass123',
   );
 
   await expect(page).toHaveURL('/account');

@@ -18,5 +18,7 @@ test('Verify user can view product details', async ({ page }) => {
     await expect(homePage.productPrice).toHaveText('14.15');
     await expect(homePage.addToCartBtn).toBeVisible();
     await expect(homePage.addToFavoriteBtn).toBeVisible();
+    await homePage.cartShopping.click();
+    await expect(page).toHaveURL('/checkout');
 }
 )
