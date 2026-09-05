@@ -6,6 +6,8 @@ export class HomePage{
     productPrice: Locator;
     addToCartBtn: Locator;
     addToFavoriteBtn: Locator;
+    alertMessage: Locator;
+    cartQuantity: Locator;
 
     constructor(page: Page){
         this.page = page;
@@ -13,6 +15,8 @@ export class HomePage{
         this.productPrice = this.page.getByTestId('unit-price');
         this.addToCartBtn = this.page.getByTestId('add-to-cart');
         this.addToFavoriteBtn = this.page.getByTestId('add-to-favorites');
+        this.alertMessage = this.page.getByRole('alert');
+        this.cartQuantity = this.page.getByTestId('cart-quantity');
   }
 
   async selectProductByName (productName: string) {
