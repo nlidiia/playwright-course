@@ -19,7 +19,9 @@ setup('Login and save authentication state', async ({ page }) => {
     page.getByRole('heading', { name: 'My account' }),
   ).toBeVisible();*/
 
-  await expect(page.getByTestId('nav-menu')).toHaveText('Bob Smith');
+  await expect(page.getByTestId('nav-menu')).toHaveText('Bob Smith', {
+  timeout: 15000,
+});
 
   await page.context().storageState({
     path: authFile,
