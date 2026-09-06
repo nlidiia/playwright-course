@@ -18,7 +18,7 @@ const sortingOptions = [
   },
 ];
 
-for (const { option, direction, multiplier } of sortingOptions) {
+sortingOptions.forEach(({ option, direction, multiplier }) => {
   test(`Verify products are sorted by name ${direction}`, async ({ page }) => {
     const homePage = new HomePage(page);
 
@@ -26,7 +26,6 @@ for (const { option, direction, multiplier } of sortingOptions) {
 
     await homePage.selectSorting(option);
 
-    // We are waiting for the goods to be sorted.
     await expect
       .poll(async () => {
         const names = await homePage.getProductNames();
@@ -40,9 +39,8 @@ for (const { option, direction, multiplier } of sortingOptions) {
       })
       .toBe(true);
 
-    // Finall list
     const actualNames = await homePage.getProductNames();
-    // expected order
+
     const expectedNames = [...actualNames].sort(
       (first, second) =>
         first.localeCompare(second) * multiplier,
@@ -51,4 +49,4 @@ for (const { option, direction, multiplier } of sortingOptions) {
     console.log('Expected:', expectedNames);
     expect(actualNames).toEqual(expectedNames);
   });
-}
+});
