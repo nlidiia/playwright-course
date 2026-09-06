@@ -45,8 +45,6 @@ sortingOptions.forEach(({ option, direction, multiplier }) => {
       (first, second) =>
         first.localeCompare(second) * multiplier,
     );
-    console.log('Actual:', actualNames);
-    console.log('Expected:', expectedNames);
     expect(actualNames).toEqual(expectedNames);
   });
 });

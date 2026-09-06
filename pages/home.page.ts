@@ -10,6 +10,7 @@ export class HomePage{
     cartQuantity: Locator;
     cartShopping: Locator;
     sortDropdown: Locator;
+    productPrices: Locator;
 
     constructor(page: Page){
         this.page = page;
@@ -21,6 +22,7 @@ export class HomePage{
         this.cartQuantity = this.page.getByTestId('cart-quantity');
         this.cartShopping = this.page.getByTestId('nav-cart');
         this.sortDropdown = page.getByTestId('sort');
+        this.productPrices = page.getByTestId('product-price');
   }
 
   async selectProductByName (productName: string) {
@@ -39,6 +41,20 @@ export class HomePage{
   const names = await this.product.allTextContents();
 
   return names.map((name) => name.trim());
+}
+async getProductPrices(): Promise<number[]> {
+  await this.productPrices.first().waitFor({
+    state: 'visible',
+  });
+
+  const prices = await this.productPrices.allTextContents();
+
+  return prices.map((price) =>
+    Number(price.replace('$', '').trim()),
+  );
+}
+async selectCategory(category: string) {
+  await this.page.getByLabel(category, { exact: true }).check();
 }
 
   
