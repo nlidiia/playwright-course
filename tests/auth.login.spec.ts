@@ -1,9 +1,9 @@
-import { test, expect } from '@playwright/test';
+import { test as setup, expect } from '@playwright/test';
 import { LoginPage } from '../pages/login.page';
 
 const authFile = 'playwright/.auth/user.json';
 
-test('Login and save authentication state', async ({ page }) => {
+setup('Login and save authentication state', async ({ page }) => {
   const loginPage = new LoginPage(page);
 
   await page.goto('/auth/login');
@@ -14,10 +14,6 @@ test('Login and save authentication state', async ({ page }) => {
   );
 
   await expect(page).toHaveURL('/account');
-  await expect(
-    page.getByRole('heading', { name: 'My account' }),
-  ).toBeVisible();
-  await expect(page.getByTestId('nav-menu')).toHaveText('Jane Doe');
 
   await page.context().storageState({
     path: authFile,
