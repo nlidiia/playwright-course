@@ -1,9 +1,4 @@
-import { test, expect } from '@playwright/test';
-import { HomePage } from '../pages/home.page';
-
-test.use({
-  storageState: 'playwright/.auth/user.json',
-});
+import { test, expect } from '../fixtures';
 
 const sortingOptions = [
   {
@@ -19,16 +14,13 @@ const sortingOptions = [
 ];
 
 sortingOptions.forEach(({ option, direction, multiplier }) => {
-  test(`Verify products are sorted by name ${direction}`, async ({ page }) => {
-    const homePage = new HomePage(page);
-
-    await page.goto('/');
-
-    await homePage.selectSorting(option);
+  test(`Verify products are sorted by name ${direction}`, async ({ loggedInApp }) => {
+    await loggedInApp.page.goto('/');
+    await loggedInApp.homePage.selectSorting(option);
 
     await expect
       .poll(async () => {
-        const names = await homePage.getProductNames();
+        const names = await loggedInApp.homePage.getProductNames();
 
         const sortedNames = [...names].sort(
           (first, second) =>
@@ -39,7 +31,7 @@ sortingOptions.forEach(({ option, direction, multiplier }) => {
       })
       .toBe(true);
 
-    const actualNames = await homePage.getProductNames();
+    const actualNames = await loggedInApp.homePage.getProductNames();
 
     const expectedNames = [...actualNames].sort(
       (first, second) =>

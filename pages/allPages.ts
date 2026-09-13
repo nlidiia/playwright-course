@@ -5,11 +5,13 @@ import { LoginPage } from "./login.page";
 import { Page } from "@playwright/test";
 
 export class AllPages {
+    page: Page;
     loginPage: LoginPage;
     homePage: HomePage;
     accountPage: AccountPage;
     cartPage: CartPage;
     constructor (page: Page){
+        this.page = page;
         this.loginPage = new LoginPage(page);
         this.homePage = new HomePage(page);
         this.accountPage = new AccountPage(page);

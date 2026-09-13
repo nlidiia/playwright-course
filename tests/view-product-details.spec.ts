@@ -1,24 +1,15 @@
-import { test, expect } from '@playwright/test';
-import { AccountPage } from "../pages/account.page"
-import { HomePage } from '../pages/home.page';
+import { test, expect } from '../fixtures';
 
-test.use({
-  storageState: 'playwright/.auth/user.json',
-});
-
-
-test('Verify user can view product details', async ({ page }) => {
-    const accountPage = new AccountPage(page);
-    const homePage = new HomePage(page);
-    await page.goto('/account');
-    await accountPage.clickHomeBtn();
-    await homePage.selectProductByName('Combination Pliers');
-    await expect(page).toHaveURL(/\/product\//);
-    await expect(homePage.product).toHaveText('Combination Pliers');
-    await expect(homePage.productPrice).toHaveText('14.15');
-    await expect(homePage.addToCartBtn).toBeVisible();
-    await expect(homePage.addToFavoriteBtn).toBeVisible();
-    await homePage.cartShopping.click();
-    await expect(page).toHaveURL('/checkout');
+test('Verify user can view product details', async ({ loggedInApp }) => {
+    await loggedInApp.page.goto('/account');
+    await loggedInApp.accountPage.clickHomeBtn();
+    await loggedInApp.homePage.selectProductByName('Combination Pliers');
+    await expect(loggedInApp.page).toHaveURL(/\/product\//);
+    await expect(loggedInApp.homePage.product).toHaveText('Combination Pliers');
+    await expect(loggedInApp.homePage.productPrice).toHaveText('14.15');
+    await expect(loggedInApp.homePage.addToCartBtn).toBeVisible();
+    await expect(loggedInApp.homePage.addToFavoriteBtn).toBeVisible();
+    await loggedInApp.homePage.cartShopping.click();
+    await expect(loggedInApp.page).toHaveURL('/checkout');
 }
 )
