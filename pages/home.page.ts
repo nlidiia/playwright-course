@@ -14,8 +14,8 @@ export class HomePage{
 
     constructor(page: Page){
         this.page = page;
-        this.product = page.getByTestId('product-name');
-        this.productPrice = this.page.getByTestId('unit-price');
+        this.product = page.getByTestId('product-name').first();
+        this.productPrices = page.getByTestId('product-price').first();
         this.addToCartBtn = this.page.getByTestId('add-to-cart');
         this.addToFavoriteBtn = this.page.getByTestId('add-to-favorites');
         this.alertMessage = this.page.getByRole('alert');
