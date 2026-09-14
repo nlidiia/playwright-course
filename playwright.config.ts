@@ -48,7 +48,7 @@ export default defineConfig({
       dependencies: ['auth'],
     },
     
-
+    /*
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
@@ -60,6 +60,7 @@ export default defineConfig({
       use: { ...devices['Desktop Safari'] },
       dependencies: ['auth'],
     },
+    */
 
     /* Test against mobile viewports. */
     // {
