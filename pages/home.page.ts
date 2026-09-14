@@ -56,4 +56,15 @@ async getProductPrices(): Promise<number[]> {
 async selectCategory(category: string) {
   await this.page.getByLabel(category, { exact: true }).check();
 }  
+async open(): Promise<void> {
+  const productsResponsePromise = this.page.waitForResponse(
+    (response) =>
+      response.url().includes('/products') &&
+      response.status() === 200,
+  );
+
+  await this.page.goto('/');
+
+  await productsResponsePromise;
+}
 }

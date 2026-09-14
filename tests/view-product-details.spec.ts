@@ -1,7 +1,7 @@
 import { test, expect } from '../fixtures';
 
 test('Verify user can view product details', async ({ loggedInApp }) => {
-    await loggedInApp.page.goto('/');
+    await loggedInApp.homePage.open();
     await loggedInApp.homePage.selectProductByName('Combination Pliers');
     await expect(loggedInApp.page).toHaveURL(/\/product\//);
     await expect(loggedInApp.homePage.product).toHaveText('Combination Pliers');
