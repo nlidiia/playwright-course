@@ -9,6 +9,7 @@ test('Verify user can view product details', async ({ loggedInApp }) => {
     await expect(loggedInApp.homePage.productPrice).toHaveText('14.15');
     await expect(loggedInApp.homePage.addToCartBtn).toBeVisible();
     await expect(loggedInApp.homePage.addToFavoriteBtn).toBeVisible();
+    await loggedInApp.homePage.addToCartBtn.click();
     await loggedInApp.homePage.cartShopping.click();
     await expect(loggedInApp.page).toHaveURL('/checkout');
 }
