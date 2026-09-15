@@ -28,5 +28,5 @@
     "tests/**/*.ts",
     "pages/**/*.ts",
     "playwright.config.ts"
-  ]
+, "fixtures.ts"  ]
 }

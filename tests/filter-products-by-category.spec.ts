@@ -1,24 +1,17 @@
-import { test, expect } from '@playwright/test';
-import { HomePage } from '../pages/home.page';
+import { test, expect } from '../fixtures';
 import { PowerTools } from '../enums/categories.enum';
 
-test.use({
-  storageState: 'playwright/.auth/user.json',
-});
+test('Verify user can filter products by category', async ({ loggedInApp }) => {
+  await loggedInApp.page.goto('/');
 
-test('Verify user can filter products by category', async ({ page }) => {
-  const homePage = new HomePage(page);
-
-  await page.goto('/');
-
-  await homePage.selectCategory(PowerTools.Sander);
+  await loggedInApp.homePage.selectCategory(PowerTools.Sander);
   await expect(
-  page.getByLabel(PowerTools.Sander, { exact: true }),
+  loggedInApp.page.getByLabel(PowerTools.Sander, { exact: true }),
 ).toBeChecked();
 
   await expect
     .poll(async () => {
-      const productNames = await homePage.getProductNames();
+      const productNames = await loggedInApp.homePage.getProductNames();
       return (
         productNames.length > 0 &&
         productNames.every((name) =>
@@ -28,7 +21,7 @@ test('Verify user can filter products by category', async ({ page }) => {
     })
     .toBe(true);
 
-  const productNames = await homePage.getProductNames();
+  const productNames = await loggedInApp.homePage.getProductNames();
 
   expect(productNames.length).toBeGreaterThan(0);
 
