@@ -1,30 +1,40 @@
 import { test as base, expect } from '@playwright/test';
 import { AllPages } from './pages/allPages';
+import { apiData, userData } from './data/user.data';
 
-type AppFixtures = {
+type Fixtures = {
   app: AllPages;
   loggedInApp: AllPages;
 };
 
-export const test = base.extend<AppFixtures>({
+export const test = base.extend<Fixtures>({
   app: async ({ page }, use) => {
-    const app = new AllPages(page);
-
-    await use(app);
+    await use(new AllPages(page));
   },
 
-  loggedInApp: async ({ browser }, use) => {
-    const context = await browser.newContext({
-      storageState: './playwright/.auth/user.json',
-    });
+  loggedInApp: async ({ page, request }, use) => {
+    const response = await request.post(
+      `${apiData.baseUrl}/users/login`,
+      {
+        data: {
+          email: userData.email,
+          password: userData.password,
+        },
+      },
+    );
 
-    const page = await context.newPage();
-    const loggedInApp = new AllPages(page);
+    expect(response.ok()).toBeTruthy();
 
-    await use(loggedInApp);
+    const responseBody = (await response.json()) as {
+    access_token: string;
+    };
 
-    await context.close();
-  },
+    await page.addInitScript((token) => {
+    localStorage.setItem('auth-token', token);
+    }, responseBody.access_token);
+
+    await use(new AllPages(page));
+    },
 });
 
 export { expect };
