@@ -1,6 +1,6 @@
 import { test, expect } from '../fixtures';
 
-test('Verify user can view product details', async ({ loggedInApp }) => {
+test('Verify user can view product details', { tag: '@smoke' }, async ({ loggedInApp }) => {
     await loggedInApp.homePage.open();
     await loggedInApp.homePage.selectProductByName('Combination Pliers');
     await expect(loggedInApp.page).toHaveURL(/\/product\//);

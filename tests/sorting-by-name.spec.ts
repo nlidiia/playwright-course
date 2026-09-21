@@ -14,7 +14,7 @@ const sortingOptions = [
 ];
 
 sortingOptions.forEach(({ option, direction, multiplier }) => {
-  test(`Verify products are sorted by name ${direction}`, async ({ loggedInApp }) => {
+  test(`Verify products are sorted by name ${direction}`, { tag: '@regression' }, async ({ loggedInApp }) => {
     await loggedInApp.page.goto('/');
     await loggedInApp.homePage.selectSorting(option);
 

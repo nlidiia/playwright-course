@@ -12,7 +12,7 @@ function getExpirationDate(): string {
   return `${month}/${year}`;
 }
 
-test('Logged-in user can purchase a product', async ({
+test('Logged-in user can purchase a product', { tag: '@smoke' }, async ({
   loggedInApp,
 }) => {
   await loggedInApp.page.goto('/');

@@ -1,7 +1,7 @@
 import { test, expect } from '../fixtures';
 import { createProduct } from '../data/product.factory';
 
-test('Verify 20 mocked products are displayed', async ({ app }) => {
+test('Verify 20 mocked products are displayed', { tag: '@regression' }, async ({ app }) => {
   const products = Array.from(
     { length: 20 },
     (_, index) => createProduct(index + 1),

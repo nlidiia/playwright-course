@@ -13,7 +13,7 @@ export const test = base.extend<Fixtures>({
 
   loggedInApp: async ({ page, request }, use) => {
     const response = await request.post(
-      `${process.env.API_BASE_URL}}/users/login`,
+      `${process.env.API_BASE_URL}/users/login`,
       {
         data: {
           email: process.env.USER_EMAIL!,

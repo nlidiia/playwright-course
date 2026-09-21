@@ -13,7 +13,7 @@ const sortingOptions = [
 ];
 
 sortingOptions.forEach(({ option, direction, multiplier }) => {
-  test(`Verify products are sorted by price ${direction}`, async ({ loggedInApp }) => {
+  test(`Verify products are sorted by price ${direction}`, { tag: '@regression' }, async ({ loggedInApp }) => {
     await loggedInApp.page.goto('/');
     await loggedInApp.homePage.selectSorting(option);
     await expect

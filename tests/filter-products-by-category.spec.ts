@@ -1,7 +1,7 @@
 import { test, expect } from '../fixtures';
 import { PowerTools } from '../enums/categories.enum';
 
-test('Verify user can filter products by category', async ({ loggedInApp }) => {
+test('Verify user can filter products by category', { tag: '@regression' }, async ({ loggedInApp }) => {
   await loggedInApp.page.goto('/');
 
   await loggedInApp.homePage.selectCategory(PowerTools.Sander);
