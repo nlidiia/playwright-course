@@ -27,6 +27,10 @@ export default defineConfig({
     ['html', { outputFolder: 'playwright-report', open: 'never' }],
     ['dot'],
     ['json', { outputFile: 'test-results/results.json' }],
+    [
+    '@testomatio/reporter/playwright',
+    { apiKey: process.env.TESTOMATIO },
+  ],
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
