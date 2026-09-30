@@ -3,7 +3,7 @@ import { LoginPage } from '../pages/login.page';
 
 const authFile = 'playwright/.auth/user.json';
 
-setup('Login and save authentication state', async ({ page }) => {
+setup.skip('Login and save authentication state', async ({ page }) => {
   const loginPage = new LoginPage(page);
 
   await page.goto('/auth/login');

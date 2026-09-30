@@ -1,6 +1,5 @@
 import { test as base, expect } from '@playwright/test';
 import { AllPages } from './pages/allPages';
-import { apiData, userData } from './data/user.data';
 
 type Fixtures = {
   app: AllPages;
@@ -14,11 +13,11 @@ export const test = base.extend<Fixtures>({
 
   loggedInApp: async ({ page, request }, use) => {
     const response = await request.post(
-      `${apiData.baseUrl}/users/login`,
+      `${process.env.API_BASE_URL}/users/login`,
       {
         data: {
-          email: userData.email,
-          password: userData.password,
+          email: process.env.USER_EMAIL!,
+          password: process.env.USER_PASSWORD!,
         },
       },
     );
